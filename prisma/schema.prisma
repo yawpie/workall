@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model biodata {
+  id_biodata    Int     @id @default(autoincrement())
+  email         String  @db.VarChar(255)
+  nama_depan    String  @db.VarChar(255)
+  nama_belakang String  @db.VarChar(255)
+  no_hp         BigInt? @db.UnsignedBigInt
+}
+
+model bukti {
+  id_bukti   Int    @id @default(autoincrement())
+  id_layanan Int
+  foto       String @db.VarChar(255)
+}
+
+model laporan {
+  id_laporan      Int      @id @default(autoincrement())
+  isi_laporan     String   @db.VarChar(255)
+  jenis_laporan   String   @db.VarChar(255)
+  id_layanan      Int
+  id_user         Int
+  tanggal_laporan DateTime @default(now()) @db.Date
+}
+
+model layanan {
+  id_layanan     Int @id @default(autoincrement())
+  id_shop        Int
+  nama_layanan   Int
+  harga_starting Int
+}
+
+model pesanan {
+  id_pesanan      Int      @id @default(autoincrement())
+  tanggal_pesanan DateTime @default(now()) @db.Date
+  harga_terbayar  Int
+  id_layanan      Int
+  id_user         Int
+}
+
+model review {
+  id_review  Int     @id @default(autoincrement())
+  id_user    Int
+  rating     Int
+  isi_review String? @db.VarChar(255)
+}
+
+model shop {
+  id_shop   Int    @id @default(autoincrement())
+  nama      String @db.VarChar(32)
+  deskripsi String @db.VarChar(255)
+}
+
+model user {
+  id_user    Int    @id @default(autoincrement())
+  username   String @db.VarChar(255)
+  password   String @db.VarChar(255)
+  id_biodata Int?
+}
