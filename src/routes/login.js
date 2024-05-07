@@ -16,10 +16,11 @@ route.post("/", async (req, res) => {
     const findUser = await prisma.user.findUnique({
       where: {
         username: username,
+        password: password,
       },
     });
     console.log(typeof findUser);
-    if (findUser && findUser.password === password) {
+    if (findUser && findUser.password == password) {
       res.session.username = username;
       res.sendFile(path("../public/index.html"));
       // TODO make session work

@@ -7,18 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model biodata {
-  id_biodata    Int     @id @default(autoincrement())
-  email         String  @db.VarChar(255)
-  nama_depan    String  @db.VarChar(255)
-  nama_belakang String  @db.VarChar(255)
-  no_hp         BigInt? @db.UnsignedBigInt
-}
-
 model bukti {
-  id_bukti   Int    @id @default(autoincrement())
+  id_bukti   Int     @id @default(autoincrement())
   id_layanan Int
-  foto       String @db.VarChar(255)
+  foto       String  @db.VarChar(255)
+  deskripsi  String? @db.VarChar(255)
 }
 
 model laporan {
@@ -53,14 +46,41 @@ model review {
 }
 
 model shop {
-  id_shop   Int    @id @default(autoincrement())
-  nama      String @db.VarChar(32)
-  deskripsi String @db.VarChar(255)
+  id_shop            Int           @id @default(autoincrement())
+  nama               String        @unique(map: "nama") @db.VarChar(32)
+  deskripsi          String?       @db.VarChar(255)
+  status_banned_shop Boolean
+  ketersediaan       Boolean
+  kategori           shop_kategori
+  no_rekening        BigInt
 }
 
 model user {
-  id_user    Int    @id @default(autoincrement())
-  username   String @db.VarChar(255)
-  password   String @db.VarChar(255)
-  id_biodata Int?
+  id_user            Int     @id @default(autoincrement())
+  email              String  @unique(map: "email") @db.VarChar(255)
+  password           String  @db.VarChar(255)
+  id_biodata         Int?
+  status_banned_user Boolean
+}
+
+model biodata_shop {
+  id_biodata_shop Int    @id @default(autoincrement())
+  alamat_toko     String @db.VarChar(255)
+  id_shop         Int
+}
+
+model biodata_user {
+  id_biodata    Int     @id @default(autoincrement())
+  username      String  @unique(map: "username") @db.VarChar(255)
+  nama_depan    String  @db.VarChar(255)
+  nama_belakang String  @db.VarChar(255)
+  no_hp         BigInt? @db.UnsignedBigInt
+}
+
+enum shop_kategori {
+  elektronik
+  plumbing
+  kendaraan
+  renovasi
+  penyewaan
 }
