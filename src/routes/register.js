@@ -23,7 +23,7 @@ route.post("/", async (req, res) => {
     const { username, password, email, nama_depan, nama_belakang } = req.body;
     const biodata = await prisma.biodata.create({
       data: {
-        email: email,
+        username: username,
         nama_depan: nama_depan,
         nama_belakang: nama_belakang,
       },
@@ -31,7 +31,7 @@ route.post("/", async (req, res) => {
 
     const user = await prisma.user.create({
       data: {
-        username: username,
+        email: email,
         password: password,
         id_biodata: biodata.id_biodata,
       },
