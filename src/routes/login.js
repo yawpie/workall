@@ -11,11 +11,11 @@ route.get("/", (req, res) => {
 });
 
 route.post("/", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
     const findUser = await prisma.user.findUnique({
       where: {
-        username: username,
+        email: email,
         password: password,
       },
     });
