@@ -28,6 +28,8 @@ model layanan {
   id_shop        Int
   nama_layanan   Int
   harga_starting Int
+
+  @@index([id_shop], map: "id_shop")
 }
 
 model pesanan {
@@ -43,6 +45,8 @@ model review {
   id_user    Int
   rating     Int
   isi_review String? @db.VarChar(255)
+
+  @@index([id_user], map: "id_user")
 }
 
 model shop {
@@ -53,28 +57,23 @@ model shop {
   ketersediaan       Boolean
   kategori           shop_kategori
   no_rekening        BigInt
+  id_user            Int
+  alamat_toko        String        @db.VarChar(255)
+  user               user          @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "shop_ibfk_1")
+
+  @@index([id_user], map: "id_user")
 }
 
 model user {
   id_user            Int     @id @default(autoincrement())
   email              String  @unique(map: "email") @db.VarChar(255)
   password           String  @db.VarChar(255)
-  id_biodata         Int?
   status_banned_user Boolean
-}
-
-model biodata_shop {
-  id_biodata_shop Int    @id @default(autoincrement())
-  alamat_toko     String @db.VarChar(255)
-  id_shop         Int
-}
-
-model biodata_user {
-  id_biodata    Int     @id @default(autoincrement())
-  username      String  @unique(map: "username") @db.VarChar(255)
-  nama_depan    String  @db.VarChar(255)
-  nama_belakang String  @db.VarChar(255)
-  no_hp         BigInt? @db.UnsignedBigInt
+  username           String  @unique(map: "username") @db.VarChar(255)
+  nama_depan         String  @db.VarChar(255)
+  nama_belakang      String  @db.VarChar(255)
+  no_hp              BigInt?
+  shop               shop[]
 }
 
 enum shop_kategori {

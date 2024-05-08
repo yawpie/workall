@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2024 at 09:00 PM
+-- Generation Time: May 08, 2024 at 08:13 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,32 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `workall`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `biodata_shop`
---
-
-CREATE TABLE `biodata_shop` (
-  `id_biodata_shop` int(11) NOT NULL,
-  `alamat_toko` varchar(255) NOT NULL,
-  `id_shop` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `biodata_user`
---
-
-CREATE TABLE `biodata_user` (
-  `id_biodata` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `nama_depan` varchar(255) NOT NULL,
-  `nama_belakang` varchar(255) NOT NULL,
-  `no_hp` bigint(12) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -128,7 +102,9 @@ CREATE TABLE `shop` (
   `status_banned_shop` tinyint(1) NOT NULL,
   `ketersediaan` tinyint(1) NOT NULL,
   `kategori` enum('elektronik','plumbing','kendaraan','renovasi','penyewaan') NOT NULL,
-  `no_rekening` bigint(20) NOT NULL
+  `no_rekening` bigint(20) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `alamat_toko` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -141,26 +117,16 @@ CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `id_biodata` int(11) DEFAULT NULL,
-  `status_banned_user` tinyint(1) NOT NULL
+  `status_banned_user` tinyint(1) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `nama_depan` varchar(255) NOT NULL,
+  `nama_belakang` varchar(255) NOT NULL,
+  `no_hp` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `biodata_shop`
---
-ALTER TABLE `biodata_shop`
-  ADD PRIMARY KEY (`id_biodata_shop`);
-
---
--- Indexes for table `biodata_user`
---
-ALTER TABLE `biodata_user`
-  ADD PRIMARY KEY (`id_biodata`),
-  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `bukti`
@@ -178,7 +144,8 @@ ALTER TABLE `laporan`
 -- Indexes for table `layanan`
 --
 ALTER TABLE `layanan`
-  ADD PRIMARY KEY (`id_layanan`);
+  ADD PRIMARY KEY (`id_layanan`),
+  ADD KEY `id_shop` (`id_shop`);
 
 --
 -- Indexes for table `pesanan`
@@ -190,37 +157,28 @@ ALTER TABLE `pesanan`
 -- Indexes for table `review`
 --
 ALTER TABLE `review`
-  ADD PRIMARY KEY (`id_review`);
+  ADD PRIMARY KEY (`id_review`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `shop`
 --
 ALTER TABLE `shop`
   ADD PRIMARY KEY (`id_shop`),
-  ADD UNIQUE KEY `nama` (`nama`);
+  ADD UNIQUE KEY `nama` (`nama`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `biodata_shop`
---
-ALTER TABLE `biodata_shop`
-  MODIFY `id_biodata_shop` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `biodata_user`
---
-ALTER TABLE `biodata_user`
-  MODIFY `id_biodata` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `bukti`
@@ -263,6 +221,16 @@ ALTER TABLE `shop`
 --
 ALTER TABLE `user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `shop`
+--
+ALTER TABLE `shop`
+  ADD CONSTRAINT `shop_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
