@@ -3,42 +3,38 @@ const route = express.Router();
 const prisma = require("../database/db");
 const path = require("../path");
 
-route.use(express.urlencoded({ extended: true }));
-route.use(express.json());
-
 route.get("/", (req, res) => {
-  try {
-    res.sendFile(path("../public/register.html"));
-    res.status(200);
-  } catch (error) {
-    console.log(error);
-    res.send(error).status(400);
-  }
+  // try {
+  //   res.sendFile(path("../public/register.html"));
+  //   res.status(200);
+  // } catch (error) {
+  //   console.log(error);
+  //   res.send(error).status(400);
+  // }
+  res.render("../views/register.ejs", { pageTitle: "Register" });
 });
 
 route.post("/", async (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
 
   try {
     const { username, password, email, nama_depan, nama_belakang } = req.body;
-    const biodata = await prisma.biodata.create({
+
+    const user = await prisma.user.create({
       data: {
         username: username,
         nama_depan: nama_depan,
         nama_belakang: nama_belakang,
-      },
-    });
-
-    const user = await prisma.user.create({
-      data: {
         email: email,
         password: password,
-        id_biodata: biodata.id_biodata,
+        status_banned_user: false,
       },
     });
 
-    res.sendFile(path("../public/login.html"));
-  } catch (error) {}
+    res.redirect("/login");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = route;

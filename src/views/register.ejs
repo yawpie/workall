@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" type="text/css" href="/styles/global.css" />
+  </head>
+  <body>
+    <%- include('./navbar.ejs') %>
+    <h1 class="text-center font-bold text-2xl bg-slate-500">
+      This is register page for workall
+    </h1>
+    <form action="/register" method="post">
+      <input type="email" name="email" id="email" placeholder="Email" /><br />
+      <input
+        type="text"
+        name="username"
+        id="username"
+        placeholder="Username"
+      /><br />
+      <input
+        type="text"
+        name="nama_depan"
+        id="nama_depan"
+        placeholder="Nama depan"
+      /><br />
+      <input
+        type="text"
+        name="nama_belakang"
+        id="nama_belakang"
+        placeholder="Nama belakang"
+      /><br />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      /><br />
+      <input type="submit" value="Submit" /><br />
+    </form>
+    <div class="bg-red"></div>
+  </body>
+</html>
