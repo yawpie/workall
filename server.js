@@ -12,4 +12,5 @@ app.use("/", route);
 
 app.listen(PORT, () => {
   console.log(`server started at port ${PORT}`);
+  console.log(`http://localhost:${PORT}`);
 });
