@@ -3,7 +3,11 @@ module.exports = {
   mode: "jit",
   content: ["./src/**/*.{html,js,ejs}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        inter: ["Inter"],
+      },
+    },
   },
   plugins: [],
 };
