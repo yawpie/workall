@@ -22,7 +22,7 @@ route.post("/", async (req, res) => {
 
     const user = await prisma.user.create({
       data: {
-        username: username,
+        username: nama_belakang,
         nama_depan: nama_depan,
         nama_belakang: nama_belakang,
         email: email,

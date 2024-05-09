@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2024 at 08:13 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 09, 2024 at 04:42 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -132,13 +132,16 @@ CREATE TABLE `user` (
 -- Indexes for table `bukti`
 --
 ALTER TABLE `bukti`
-  ADD PRIMARY KEY (`id_bukti`);
+  ADD PRIMARY KEY (`id_bukti`),
+  ADD KEY `id_layanan` (`id_layanan`);
 
 --
 -- Indexes for table `laporan`
 --
 ALTER TABLE `laporan`
-  ADD PRIMARY KEY (`id_laporan`);
+  ADD PRIMARY KEY (`id_laporan`),
+  ADD KEY `id_layanan` (`id_layanan`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `layanan`
@@ -151,7 +154,9 @@ ALTER TABLE `layanan`
 -- Indexes for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  ADD PRIMARY KEY (`id_pesanan`);
+  ADD PRIMARY KEY (`id_pesanan`),
+  ADD KEY `id_layanan` (`id_layanan`,`id_user`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `review`
@@ -173,8 +178,7 @@ ALTER TABLE `shop`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -220,11 +224,43 @@ ALTER TABLE `shop`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `bukti`
+--
+ALTER TABLE `bukti`
+  ADD CONSTRAINT `id_layanan` FOREIGN KEY (`id_layanan`) REFERENCES `layanan` (`id_layanan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `laporan`
+--
+ALTER TABLE `laporan`
+  ADD CONSTRAINT `laporan_ibfk_1` FOREIGN KEY (`id_layanan`) REFERENCES `layanan` (`id_layanan`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `laporan_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `layanan`
+--
+ALTER TABLE `layanan`
+  ADD CONSTRAINT `layanan_ibfk_1` FOREIGN KEY (`id_shop`) REFERENCES `shop` (`id_shop`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pesanan`
+--
+ALTER TABLE `pesanan`
+  ADD CONSTRAINT `id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pesanan_ibfk_1` FOREIGN KEY (`id_layanan`) REFERENCES `layanan` (`id_layanan`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `review`
+--
+ALTER TABLE `review`
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `shop`
