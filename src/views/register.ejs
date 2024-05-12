@@ -17,12 +17,13 @@
           Daftar
         </p>
         <form
+          id="register_form"
           action="/register"
           method="post"
           class="flex items-center justify-center flex-col"
         >
           <input
-            class="text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
+            class="focus:outline-none focus:border-2 text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
             type="text"
             name="nama_depan"
             id="nama_depan"
@@ -30,7 +31,7 @@
           />
           <br />
           <input
-            class="text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
+            class="focus:outline-none focus:border-2 text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
             type="text"
             name="nama_belakang"
             id="nama_belakang"
@@ -38,7 +39,7 @@
           />
           <br />
           <input
-            class="text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
+            class="focus:outline-none focus:border-2 text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
             type="email"
             name="email"
             id="email"
@@ -46,7 +47,7 @@
           /><br />
 
           <input
-            class="text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
+            class="text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid invalid:border-rose-600 focus:border-2 focus:invalid:border-rose-600 focus:invalid:ring-rose-600 focus:outline-none"
             type="password"
             name="password"
             id="password"
@@ -54,7 +55,7 @@
           />
           <br />
           <input
-            class="text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
+            class="text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid invalid:border-rose-600 focus:border-2 focus:invalid:border-rose-600 focus:invalid:ring-rose-600 focus:outline-none"
             type="password"
             name="password_confirm"
             id="password_confirm"
@@ -74,11 +75,10 @@
           </div>
 
           <input
-            class="p-2 mb-6 bg-workallgreen rounded-md w-10/12 text-center text-sm text-white font-semibold"
+            class="p-2 mb-6 bg-workallgreen rounded-md w-10/12 text-center text-sm text-white font-semibold hover:cursor-pointer"
             type="submit"
             value="Daftar"
             id="register_button"
-            onmouseover="this.style.cursor='pointer'"
           />
         </form>
       </div>
