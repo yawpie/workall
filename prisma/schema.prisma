@@ -12,6 +12,9 @@ model bukti {
   id_layanan Int
   foto       String  @db.VarChar(255)
   deskripsi  String? @db.VarChar(255)
+  layanan    layanan @relation(fields: [id_layanan], references: [id_layanan], onDelete: Cascade, map: "id_layanan")
+
+  @@index([id_layanan], map: "id_layanan")
 }
 
 model laporan {
@@ -21,13 +24,22 @@ model laporan {
   id_layanan      Int
   id_user         Int
   tanggal_laporan DateTime @default(now()) @db.Date
+  layanan         layanan  @relation(fields: [id_layanan], references: [id_layanan], onDelete: Cascade, map: "laporan_ibfk_1")
+  user            user     @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "laporan_ibfk_2")
+
+  @@index([id_layanan], map: "id_layanan")
+  @@index([id_user], map: "id_user")
 }
 
 model layanan {
-  id_layanan     Int @id @default(autoincrement())
+  id_layanan     Int       @id @default(autoincrement())
   id_shop        Int
   nama_layanan   Int
   harga_starting Int
+  bukti          bukti[]
+  laporan        laporan[]
+  shop           shop      @relation(fields: [id_shop], references: [id_shop], onDelete: Cascade, map: "layanan_ibfk_1")
+  pesanan        pesanan[]
 
   @@index([id_shop], map: "id_shop")
 }
@@ -38,6 +50,11 @@ model pesanan {
   harga_terbayar  Int
   id_layanan      Int
   id_user         Int
+  user            user     @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "id_user")
+  layanan         layanan  @relation(fields: [id_layanan], references: [id_layanan], onDelete: Cascade, map: "pesanan_ibfk_1")
+
+  @@index([id_layanan, id_user], map: "id_layanan")
+  @@index([id_user], map: "id_user")
 }
 
 model review {
@@ -45,6 +62,7 @@ model review {
   id_user    Int
   rating     Int
   isi_review String? @db.VarChar(255)
+  user       user    @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "review_ibfk_1")
 
   @@index([id_user], map: "id_user")
 }
@@ -59,20 +77,24 @@ model shop {
   no_rekening        BigInt
   id_user            Int
   alamat_toko        String        @db.VarChar(255)
+  layanan            layanan[]
   user               user          @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "shop_ibfk_1")
 
   @@index([id_user], map: "id_user")
 }
 
 model user {
-  id_user            Int     @id @default(autoincrement())
-  email              String  @unique(map: "email") @db.VarChar(255)
-  password           String  @db.VarChar(255)
+  id_user            Int       @id @default(autoincrement())
+  email              String    @unique(map: "email") @db.VarChar(255)
+  password           String    @db.VarChar(255)
   status_banned_user Boolean
-  username           String  @unique(map: "username") @db.VarChar(255)
-  nama_depan         String  @db.VarChar(255)
-  nama_belakang      String  @db.VarChar(255)
+  username           String    @db.VarChar(255)
+  nama_depan         String    @db.VarChar(255)
+  nama_belakang      String    @db.VarChar(255)
   no_hp              BigInt?
+  laporan            laporan[]
+  pesanan            pesanan[]
+  review             review[]
   shop               shop[]
 }
 

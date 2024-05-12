@@ -5,21 +5,67 @@
     <title>login workall</title>
     <link rel="stylesheet" href="/styles/global.css" />
   </head>
-  <body>
-    <form action="/login" method="post">
-      <input type="email" name="email" id="email" placeholder="Email" /><br />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Password"
-      />
-      <br />
-      <input type="submit" value="Login" />
-    </form>
-    <div class="text-red-800 text-center text-2xl font-bold">
-      tes tailwind color
+  <body class="bg-primary">
+    <div class="flex h-screen items-center justify-center">
+      <div class="bg-white rounded-xl h-96 drop-shadow-lg w-96">
+        <div class="flex justify-center items-center mt-6 mb-4">
+          <img src="/images/logo.svg" alt="Logo" />
+        </div>
+        <p
+          class="mt-2 mb-4 text-center text-workallgreen font-semibold text-xl"
+        >
+          Masuk
+        </p>
+        <form
+          action="/login"
+          method="post"
+          class="flex items-center justify-center flex-col"
+        >
+          <input
+            class="text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Alamat Email"
+          /><br />
+
+          <input
+            class="text-sm placeholder:text-workallgreen w-10/12 p-2 my-1 rounded-md border-workallgreen border border-solid"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+          />
+
+          <div class="m-1"></div>
+          <div
+            class="mt-2 p-2 flex justify-end text-workallgreen font-semibold text-xs"
+          >
+            <p class="text-right">
+              <a href="/">Lupa password?</a>
+            </p>
+          </div>
+
+          <div class="p-2 mb-2">
+            <p class="text-workallgreen text-xs">
+              Belum memiliki akun?
+              <a href="/register" class="font-semibold">Daftar</a>
+            </p>
+          </div>
+
+          <a
+            href=""
+            class="p-2 mb-6 bg-workallgreen rounded-md w-10/12 text-center"
+          >
+            <input
+              class="text-sm bg-workallgreen text-white font-semibold"
+              type="submit"
+              value="Masuk"
+              onmouseover="this.style.cursor='pointer'"
+            />
+          </a>
+        </form>
+      </div>
     </div>
-    <p class="text-center text-2xl font-bold bg-green-800">this is login</p>
   </body>
 </html>
