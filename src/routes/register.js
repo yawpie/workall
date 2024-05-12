@@ -1,7 +1,6 @@
 const express = require("express");
 const route = express.Router();
 const prisma = require("../database/db");
-const path = require("../path");
 
 route.get("/", (req, res) => {
   // try {

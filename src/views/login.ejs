@@ -2,8 +2,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>login workall</title>
+    <title>workall | Masuk</title>
     <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png" />
   </head>
   <body class="bg-primary">
     <div class="flex h-screen items-center justify-center">
@@ -17,6 +18,7 @@
           Masuk
         </p>
         <form
+          id="login_form"
           action="/login"
           method="post"
           class="flex items-center justify-center flex-col"
@@ -53,19 +55,15 @@
             </p>
           </div>
 
-          <a
-            href=""
-            class="p-2 mb-6 bg-workallgreen rounded-md w-10/12 text-center"
-          >
-            <input
-              class="hover:cursor-pointer  text-sm bg-workallgreen text-white font-semibold"
-              type="submit"
-              value="Masuk"
-              
-            />
-          </a>
+          <input
+            class="rounded-md hover:cursor-pointer text-sm bg-workallgreen text-white font-semibold w-10/12 p-2 mb-6"
+            type="submit"
+            value="Masuk"
+            id="submit_login"
+          />
         </form>
       </div>
     </div>
+    <script src="/scripts/password_check.js"></script>
   </body>
 </html>

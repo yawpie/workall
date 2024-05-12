@@ -1,15 +1,13 @@
 const express = require("express");
 const route = express.Router();
 const prisma = require("../database/db");
-const session = require("./session");
-const path = require("../path");
+const session = require("express-session");
 
 route.use(express.json());
-route.use(session);
+route.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
 route.get("/", (req, res) => {
-  // res.sendFile(path("../public/login.html"));
+  res.render("../views/login.ejs");
   console.log("login");
-  res.render("../views/login", { pageTitle: "Login" });
 });
 
 route.post("/", async (req, res) => {
@@ -27,15 +25,16 @@ route.post("/", async (req, res) => {
       });
     console.log(typeof findUser);
     if (findUser.password == password) {
-      res.session.email = email;
-      res.session.username = findUser.username;
-      res.sendFile(path("../views/index.html"));
+      req.session.email = email;
+      req.session.save();
+      console.log("tes");
+      res.redirect("/");
       // TODO make session work
     } else {
-      res.send("wrong password").status(400);
+      res.send("wrong password");
     }
   } catch (error) {
-    res.send(error).status(400);
+    console.log(error);
   }
 });
 

@@ -5,6 +5,7 @@ const transaction = require("./transaction");
 const register = require("./register");
 const login = require("./login");
 const landing_page = require("./landing_page");
+
 route.use(express.urlencoded({ extended: true }));
 route.use(express.json());
 route.use(express.static("public"));
