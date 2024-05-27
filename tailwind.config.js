@@ -10,12 +10,23 @@ module.exports = {
         prata: ["Prata"],
       },
       colors: {
-        primary: "#f4f4f4",
-        workallgreen: "7d887a",
+        primary: "f4f4f4",
+        "w-green": "7d887a",
+        "w-grey": "383838",
+        "w-button": "ebeff6",
       },
       spacing: {
         "register-screen": "600px",
       },
+    },
+    keyframes: {
+      "scale-up": {
+        "0%": { transform: "scale(1)" },
+        "100%": { transform: "scale(1.05)" },
+      },
+    },
+    animation: {
+      "scale-up": "scale-up 0.1s ease-in-out forwards",
     },
   },
   plugins: [],

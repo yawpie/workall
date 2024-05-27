@@ -8,3 +8,15 @@
 * {
   font-family: "Inter", sans-serif;
 }
+
+.button-category {
+  @apply mx-[22px] w-[128px] h-[128px] flex flex-col justify-center items-center border border-w-button rounded-xl px-4 py-2 drop-shadow-md bg-white hover:animate-scale-up;
+}
+
+.text-input {
+  @apply py-[10px] px-[8px] mx-[40px] w-[358px] outline-none border border-w-green placeholder:text-w-green placeholder:text-[13px] rounded-md focus:border-2;
+}
+
+.button-register {
+  @apply p-2 mb-6 bg-w-green rounded-md w-10/12 text-center text-sm text-white font-semibold hover:cursor-pointer;
+}
