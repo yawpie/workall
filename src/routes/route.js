@@ -5,6 +5,7 @@ const transaction = require("./transaction");
 const register = require("./register");
 const login = require("./login");
 const landing_page = require("./landing_page");
+const open_shop = require("./open_shop");
 
 route.use(express.urlencoded({ extended: true }));
 route.use(express.json());
@@ -14,5 +15,6 @@ route.use("/transaction", transaction);
 route.use("/register", register);
 route.use("/login", login);
 route.use("/", landing_page);
+route.use("/open_shop", open_shop);
 
 module.exports = route;
