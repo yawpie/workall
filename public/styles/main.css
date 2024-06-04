@@ -18,5 +18,6 @@
 }
 
 .button-register {
-  @apply p-2 mb-6 bg-w-green rounded-md w-10/12 text-center text-sm text-white font-semibold hover:cursor-pointer;
+  @apply w-10/12 p-2 mb-6 text-sm font-semibold text-center text-white rounded-md bg-w-green hover:cursor-pointer;
 }
+

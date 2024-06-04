@@ -1,0 +1,72 @@
+<header class="border-b border-[#7D887A]">
+  <div class="flex justify-between py-4 mx-4">
+    <div class="flex items-center justify-center px-4 text-2xl font-semibold">
+      <a class="font-plusJakarta" href="/">workall</a>
+    </div>
+    <ul class="flex justify-between w-72">
+      <li class="flex items-center justify-center underline">
+        <a href="/open_shop">Buka Toko</a>
+      </li>
+      <li class="flex items-center justify-center">
+        <button id="notifikasiButton" >
+          <img src="/images/notif.svg" alt="">
+        </button>
+        <div id="notifikasi" class="absolute z-10 w-[257px] hidden h-[257px] bg-white border top-[13%] right-[12%] rounded-3xl shadow-md">
+          notif
+        </div>
+      </li>
+      <li class="flex items-center justify-center">
+        <button id="pesananButton" class="">
+          <img src="/images/pesanan.svg" alt="">
+        </button>
+        <div id="pesanan" class="absolute  z-10 w-[257px] hidden h-[257px] bg-white border top-[13%] right-[6%]  rounded-3xl shadow-md">
+          pesan
+        </div>
+      </li>
+      <li class="flex items-center justify-center">
+        <button class="p-5 border-2 rounded-full bg-slate-600">
+          <!-- <img src="" alt=""> -->
+        </button>
+      </li>
+    </ul>
+  </div>
+  <script>
+    const notifButton = document.getElementById('notifikasiButton');
+    const pesanButton = document.getElementById('pesananButton');
+    const notifikasi = document.getElementById('notifikasi');
+    const pesanan = document.getElementById('pesanan');
+  
+    notifButton.addEventListener('click', function(e) {
+      if(notifikasi.classList.contains('hidden') == true) {
+        notifikasi.classList.toggle('hidden'); 
+      }else{
+        notifikasi.classList.toggle('hidden'); 
+      }
+      if(pesanan.classList.contains('hidden') == false) {
+        pesanan.classList.toggle('hidden');
+      }
+      e.stopPropagation();
+    })
+  
+    pesanButton.addEventListener('click', function(e) {
+      if(pesanan.classList.contains('hidden') == true) {
+        pesanan.classList.toggle('hidden');
+      }else{
+        pesanan.classList.toggle('hidden');
+      }
+      if(notifikasi.classList.contains('hidden') == false) {
+        notifikasi.classList.toggle('hidden');
+      }
+      e.stopPropagation();
+    })
+  
+    document.addEventListener('click', function(e) {
+      if (!notifikasi.contains(e.target) && !notifButton.contains(e.target)) {
+        notifikasi.classList.add('hidden');
+      }
+      if (!pesanan.contains(e.target) && !pesanButton.contains(e.target)) {
+        pesanan.classList.add('hidden');
+      }
+    })
+  </script>
+</header>
