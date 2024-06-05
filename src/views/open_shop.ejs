@@ -5,12 +5,29 @@
     <title>Workall | Buka Toko</title>
     <link rel="stylesheet" href="/styles/global.css" />
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png" />
+    <style>
+      .form-section {
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        transform: translateX(-20%);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .form-section.online {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .form-section.prev {
+        transform: translateX(-100%);
+      }
+    </style>
   </head>
   <body>
-    <%- include('./component/header_login.ejs') %>
+    <%- include('./component/header.ejs') %>
     <div class="flex flex-row justify-evenly items-center p-[36px]">
-      <div class="flex flex-col items-center justify-center">
-        <div class="flex flex-col items-center justify-center">
+      <div class="flex flex-col justify-center items-center">
+        <div class="flex flex-col justify-center items-center">
           <p class="inter font-semibold text-[20px]">
             Masukkan informasi bisnis Anda
           </p>
@@ -29,48 +46,127 @@
         />
       </div>
       <div
-        class="flex flex-col items-center justify-center bg-white drop-shadow-md rounded-xl"
+        class="flex items-center justify-center flex-col drop-shadow-md bg-white rounded-[55px] w-[430px]"
+        id="register-screen"
       >
         <p class="inter font-semibold text-[20px] my-7">Pendaftaran Bisnis</p>
         <form class="flex flex-col" action="/open_shop" method="post">
-          <label class="mx-10 font-semibold" for="nama_toko">Nama Bisnis</label>
-          <input
-            type="text"
-            name="nama_toko"
-            placeholder="Masukkan nama bisnis..."
-            class="text-input"
-          />
-          <label class="mx-10 mt-6 font-semibold" for="alamat">Alamat</label>
-          <input
-            type="text"
-            name="alamat"
-            placeholder="Masukkan alamat..."
-            class="text-input"
-          />
-          <label class="mx-10 mt-6 font-semibold" for="kontak">Kontak</label>
-          <input
-            type="text"
-            name="kontak"
-            placeholder="Masukkan kontak yang bisa dihubungi..."
-            class="text-input"
-          />
-          <label class="mx-10 mt-6 font-semibold" for="deskripsi"
-            >Deskripsi</label
-          >
-          <textarea
-            name="deskripsi"
-            id="deskripsi"
-            class="text-input h-28"
-            placeholder="Jelaskan sedikit tentang bisnis anda..."
-            maxlength="255"
-          ></textarea>
-          <input
-            type="submit"
-            value="Selanjutnya"
-            class="mx-10 mt-6 button-register"
-          />
+          <!-- section 1 -->
+          <div class="form-section online w-[100%]" id="section_1">
+            <label
+              class="mx-10 font-semibold hide-when-pressed_1"
+              for="nama_toko"
+              >Nama Bisnis</label
+            >
+            <input
+              type="text"
+              name="nama_toko"
+              placeholder="Masukkan nama bisnis..."
+              class="text-input hide-when-pressed_1"
+            />
+            <label
+              class="hide-when-pressed_1 mt-6 mx-10 font-semibold"
+              for="alamat"
+              >Alamat</label
+            >
+            <input
+              type="text"
+              name="alamat"
+              placeholder="Masukkan alamat..."
+              class="text-input hide-when-pressed_1"
+            />
+            <label
+              class="mt-6 mx-10 font-semibold hide-when-pressed_1"
+              for="kontak"
+              >Kontak</label
+            >
+            <input
+              type="text"
+              name="kontak"
+              placeholder="Masukkan kontak yang bisa dihubungi..."
+              class="text-input hide-when-pressed_1"
+            />
+            <label
+              class="mt-6 mx-10 font-semibold hide-when-pressed_1"
+              for="deskripsi"
+              >Deskripsi</label
+            >
+            <textarea
+              name="deskripsi"
+              class="text-input h-28 hide-when-pressed_1"
+              placeholder="Jelaskan sedikit tentang bisnis anda..."
+              maxlength="255"
+            ></textarea>
+
+            <input
+              type="button"
+              value="Selanjutnya"
+              id="next_button"
+              class="button-register mx-10 mt-6 hide-when-pressed_1"
+              onclick="next(2)"
+            />
+          </div>
+          <!-- hidden form -->
+          <div class="form-section" id="section_2">
+            <p class="hide-when-pressed_1 flex items-center justify-center">
+              Foto Profil Bisnis
+            </p>
+            <div class="flex justify-center hide-when-pressed_1">
+              <img
+                src="/images/placeholder/profile-placeholder.png"
+                id="profile-pic"
+                alt="profilepic"
+                class="w-[300px] h-[300px] rounded-full mx-10 mt-6 hide-when-pressed_1"
+              />
+            </div>
+            <input
+              type="file"
+              name="shop_profile"
+              accept="image/png, image/jpg, image/jpeg"
+              class="mx-10 mt-[20px] outline-none border rounded bg-primary text-w-green hide-when-pressed_1"
+            />
+            <input
+              type="button"
+              value="Selanjutnya"
+              id="another-next_button"
+              class="button-register mx-10 mt-6 hide-when-pressed_1 hide-when-pressed_1"
+            />
+
+            <div class="flex justify-center items-center">
+              <input
+                type="button"
+                class="outline-none underline text-w-grey cursor-pointer w-[60px] hide-when-pressed_1"
+                value="Lewati"
+              />
+            </div>
+          </div>
         </form>
       </div>
     </div>
+    <script>
+      function next(sectionId) {
+        const currentSection = document.querySelector(".form-section.online");
+        const nextSection = document.getElementById(`section_${sectionId}`);
+
+        currentSection.classList.remove("online");
+        nextSection.classList.add("online");
+      }
+
+      function prevSection(sectionId) {
+        const currentSection = document.querySelector(".form-section.active");
+        const prevSection = document.getElementById(`section_${sectionId}`);
+
+        currentSection.classList.remove("active");
+        prevSection.classList.add("active");
+      }
+
+      document
+        .getElementById("multiStepForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          alert("Form submitted!");
+        });
+    </script>
+    <!-- <script src="/scripts/open_shop.js"></script> -->
   </body>
 </html>
