@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/global.css">
+</head>
+
+<body>
+    <%- include('./component/header_login.ejs') %>
+    <div class="mx-[120px] my-[30px] gap-[10px]">
+        <h1 class="p-[10px] text-[32px] font-semibold">Elektronik</h1>
+        <h2 class="p-[10px] text-[24px] font-semibold">Rekomendasi Toko:</h2>
+        <!-- container card toko -->
+        <div class="py-[10px] gap-[10px] flex flex-wrap">
+            <!-- card toko -->
+            <!-- nanti disini for each -->
+            <%- include('./component/card_toko.ejs') %>
+            <%- include('./component/card_toko.ejs') %>
+            <%- include('./component/card_toko.ejs') %>
+            <%- include('./component/card_toko.ejs') %>
+        </div>
+        
+        <h2 class="p-[10px] text-[24px] font-semibold">Rekomendasi Layanan:</h2>
+        <!-- container card layanan -->
+        <div class=" gap-[30px] my-[10px] mx-[40px] flex flex-wrap justify-stretch ">
+            <!-- card layanan -->
+            <!-- nanti disini for each -->
+            <%- include('./component/card_layanan.ejs') %>
+        </div>
+    </div>
+</body>
+
+</html>

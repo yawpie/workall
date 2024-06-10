@@ -18,6 +18,9 @@ module.exports = {
       spacing: {
         "register-screen": "600px",
       },
+      boxShadow: {
+        "around": "0 0 15px 8px rgba(0, 0, 0, 0.3)",
+      }
     },
     keyframes: {
       "scale-up": {
