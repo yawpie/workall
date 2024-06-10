@@ -1,7 +1,3 @@
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const submit_login = document.getElementById("submit_login");
-
 submit_login.addEventListener("click", (event) => {
   if (password.value == "") {
     event.preventDefault();

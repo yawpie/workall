@@ -8,7 +8,7 @@
   </head>
   <body class="bg-primary">
     <div class="flex h-screen items-center justify-center">
-      <div class="bg-white rounded-xl h-96 drop-shadow-lg w-96">
+      <div class="bg-white rounded-[55px] h-96 drop-shadow-lg w-96">
         <div class="flex justify-center items-center mt-6 mb-4">
           <img src="/images/logo.svg" alt="Logo" />
         </div>
@@ -54,7 +54,7 @@
           </div>
 
           <input
-            class="rounded-md hover:cursor-pointer text-sm bg-w-green text-white font-semibold w-10/12 p-2 mb-6"
+            class="button-register mb-6"
             type="submit"
             value="Masuk"
             id="submit_login"
@@ -62,6 +62,18 @@
         </form>
       </div>
     </div>
+    <script>
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      const submit_login = document.getElementById("submit_login");
+    </script>
     <script src="/scripts/password_check.js"></script>
+    <!-- <script src="/scripts/check_user.js"></script>
+    <script>
+      submit_login.addEventListener("click", (event) => {
+        login(email.value, password.value);
+        event.preventDefault();
+      });
+    </script> -->
   </body>
 </html>
