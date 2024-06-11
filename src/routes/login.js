@@ -1,10 +1,9 @@
 const express = require("express");
 const route = express.Router();
 const prisma = require("../database/db");
-const session = require("express-session");
 
 route.use(express.json());
-route.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
+
 route.get("/", (req, res) => {
   res.render("../views/login.ejs", {
     header: "../views/component/header_plain.ejs",
@@ -13,10 +12,9 @@ route.get("/", (req, res) => {
 });
 
 route.post("/", async (req, res) => {
-  console.log(req.body);
   const { email, password } = req.body;
   try {
-    const findUser = await prisma.user
+    const userdata = await prisma.user
       .findUnique({
         where: {
           email: email,
@@ -32,11 +30,12 @@ route.post("/", async (req, res) => {
       req.session.authenticated = true;
       console.log(req.session.user);
       req.session.save();
-      console.log("tes");
+      res.status(200);
       res.redirect("/");
-      // TODO make session work
     } else {
-      res.send("wrong password");
+      res.send("Wrong Password");
+      console.log("Wrong Password");
+      res.redirect("/login");
     }
   } catch (error) {
     console.log(error);

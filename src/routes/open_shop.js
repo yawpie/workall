@@ -1,5 +1,6 @@
 const express = require("express");
 const route = express.Router();
+const checkAuth = require("../utils/checkAuth");
 
 route.get("/", checkAuth, (req, res) => {
   const loggedInHeader = "../views/component/header_login.ejs";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2024 at 04:42 PM
+-- Generation Time: Jun 11, 2024 at 04:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,8 +58,9 @@ CREATE TABLE `laporan` (
 CREATE TABLE `layanan` (
   `id_layanan` int(11) NOT NULL,
   `id_shop` int(11) NOT NULL,
-  `nama_layanan` int(11) NOT NULL,
-  `harga_starting` int(11) NOT NULL
+  `nama_layanan` varchar(255) NOT NULL,
+  `harga_starting` int(11) NOT NULL,
+  `kategori` enum('renovasi','elektronik','plumbing','kendaraan','penyewaan') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -97,14 +98,15 @@ CREATE TABLE `review` (
 
 CREATE TABLE `shop` (
   `id_shop` int(11) NOT NULL,
-  `nama` varchar(32) NOT NULL,
+  `nama_toko` varchar(32) NOT NULL,
   `deskripsi` varchar(255) DEFAULT NULL,
   `status_banned_shop` tinyint(1) NOT NULL,
   `ketersediaan` tinyint(1) NOT NULL,
-  `kategori` enum('elektronik','plumbing','kendaraan','renovasi','penyewaan') NOT NULL,
   `no_rekening` bigint(20) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `alamat_toko` varchar(255) NOT NULL
+  `alamat_toko` varchar(255) NOT NULL,
+  `foto_profil_toko` varchar(255) DEFAULT NULL,
+  `kontak_toko` bigint(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -123,6 +125,16 @@ CREATE TABLE `user` (
   `nama_belakang` varchar(255) NOT NULL,
   `no_hp` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_user`, `email`, `password`, `status_banned_user`, `username`, `nama_depan`, `nama_belakang`, `no_hp`) VALUES
+(25, 'tes@mail.com', 'pass', 0, 'yawpie', 'tes', 'tes', NULL),
+(37, 'mail@mail.com', '1234', 0, 'rafi', 'rafi', 'rafi', NULL),
+(46, 'm@mail.com', '1234', 0, 'rafi', 'rafi', 'rafi', NULL),
+(48, 'n@mail.com', '1234', 0, 'me', 'me', 'me', NULL);
 
 --
 -- Indexes for dumped tables
@@ -170,7 +182,7 @@ ALTER TABLE `review`
 --
 ALTER TABLE `shop`
   ADD PRIMARY KEY (`id_shop`),
-  ADD UNIQUE KEY `nama` (`nama`),
+  ADD UNIQUE KEY `nama` (`nama_toko`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -224,7 +236,7 @@ ALTER TABLE `shop`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Constraints for dumped tables
