@@ -32,13 +32,14 @@ model laporan {
 }
 
 model layanan {
-  id_layanan     Int       @id @default(autoincrement())
+  id_layanan     Int              @id @default(autoincrement())
   id_shop        Int
-  nama_layanan   Int
+  nama_layanan   String           @db.VarChar(255)
   harga_starting Int
+  kategori       layanan_kategori
   bukti          bukti[]
   laporan        laporan[]
-  shop           shop      @relation(fields: [id_shop], references: [id_shop], onDelete: Cascade, map: "layanan_ibfk_1")
+  shop           shop             @relation(fields: [id_shop], references: [id_shop], onDelete: Cascade, map: "layanan_ibfk_1")
   pesanan        pesanan[]
 
   @@index([id_shop], map: "id_shop")
@@ -68,17 +69,18 @@ model review {
 }
 
 model shop {
-  id_shop            Int           @id @default(autoincrement())
-  nama               String        @unique(map: "nama") @db.VarChar(32)
-  deskripsi          String?       @db.VarChar(255)
+  id_shop            Int       @id @default(autoincrement())
+  nama_toko          String    @unique(map: "nama") @db.VarChar(32)
+  deskripsi          String?   @db.VarChar(255)
   status_banned_shop Boolean
   ketersediaan       Boolean
-  kategori           shop_kategori
   no_rekening        BigInt
   id_user            Int
-  alamat_toko        String        @db.VarChar(255)
+  alamat_toko        String    @db.VarChar(255)
+  foto_profil_toko   String?   @db.VarChar(255)
+  kontak_toko        BigInt
   layanan            layanan[]
-  user               user          @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "shop_ibfk_1")
+  user               user      @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "shop_ibfk_1")
 
   @@index([id_user], map: "id_user")
 }
@@ -98,10 +100,10 @@ model user {
   shop               shop[]
 }
 
-enum shop_kategori {
+enum layanan_kategori {
+  renovasi
   elektronik
   plumbing
   kendaraan
-  renovasi
   penyewaan
 }
