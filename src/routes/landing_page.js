@@ -17,7 +17,7 @@ route.get("/", checkShop, (req, res) => {
     shop = true;
   }
 
-  res.render("../views/index.ejs", { header, shop });
+  res.render("../views/landing_page.ejs", { header, shop });
 });
 
 module.exports = route;

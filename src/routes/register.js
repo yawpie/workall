@@ -48,20 +48,35 @@ route.post("/", async (req, res) => {
     const shop = await prisma.shop.create({
       data: {
         id_user: user.id_user,
-        nama: "null",
+        nama_toko: "null",
         alamat_toko: "null",
         kontak_toko: 0,
         deskripsi: "null",
-        kategori: "null",
         no_rekening: 0,
         ketersediaan: false,
         status_banned_shop: false,
       },
     });
 
-    res.redirect("/login");
+    console.log("user:", user);
+    console.log("shop:", shop);
+    req.session.user = user;
+    req.session.authenticated = true;
+    res.json({
+      success: true,
+      message: "Success",
+      redirectUrl: "/",
+    });
   } catch (error) {
     console.log(error);
+    console.log(error.code);
+    res.json({
+      success: false,
+      message: error.message || "Error :(",
+      error: {
+        type: error.code,
+      },
+    });
   }
 });
 

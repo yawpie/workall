@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
       },
     });
 
-    if (!shop_data) {
+    if (shop_data === null) {
       next();
     }
     req.session.shop = shop_data;
@@ -19,5 +19,6 @@ module.exports = async (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
+    next();
   }
 };

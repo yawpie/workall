@@ -7,7 +7,7 @@
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png" />
   </head>
   <body class="bg-primary">
-    <%- include(header, shop) %>
+    <%- include(header) %>
     <div class="flex h-screen items-center justify-center">
       <div
         class="bg-white rounded-[55px] h-register-screen drop-shadow-lg w-96"
@@ -86,23 +86,40 @@
         </form>
       </div>
     </div>
-    <script src="/scripts/confirm_password.js"></script>
+    <!-- <script src="/scripts/confirm_password.js"></script> -->
     <script>
-      const form = document.getElementById("register_form");
-      const button = document.getElementById("register_button");
+      document
+        .getElementById("register_form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
 
-      form.addEventListener("submit", function (event) {
-        try {
-          fetch("/register/check-exist").then((response) => {
-            if (response.exist) {
-              event.preventDefault();
-              alert("Email sudah terdaftar");
+          const formData = new FormData(
+            document.getElementById("register_form")
+          );
+          const data = Object.fromEntries(formData.entries());
+
+          try {
+            const response = await fetch("/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+              window.location.href = result.redirectUrl;
+            } else if (result.error.type === "P2002") {
+              alert("Email already exists");
+            } else {
+              alert("Error :(");
             }
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      });
+          } catch (error) {
+            console.error("Fetch Error:", error);
+            alert("An error occurred while submitting the form.");
+          }
+        });
     </script>
   </body>
 </html>

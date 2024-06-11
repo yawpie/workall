@@ -36,30 +36,3 @@ register_form.addEventListener("submit", (event) => {
   resetValidity(password);
   resetValidity(password_confirm);
 });
-
-// register_form.addEventListener("submit", (event) => {
-//   const password = document.getElementById("password");
-//   const password_confirm = document.getElementById("password_confirm");
-//   console.log("register pressed");
-
-//   if (password.value !== password_confirm.value) {
-//     // alert("Password tidak cocok");
-//     event.preventDefault();
-//     console.log("password mismatch");
-//     console.log(password.value, " ", password_confirm.value);
-//     password.setCustomValidity("Password tidak cocok");
-//     password_confirm.setCustomValidity("Password tidak cocok");
-//     password.reportValidity();
-//     password_confirm.reportValidity();
-//     password.value = "";
-//     password_confirm.value = "";
-//     window.location.reload();
-//   } else {
-//     console.log("password match");
-//     password.setCustomValidity("");
-//     password_confirm.setCustomValidity("");
-//     password.reportValidity();
-//     password_confirm.reportValidity();
-//     register_form.submit();
-//   }
-// });

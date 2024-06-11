@@ -6,10 +6,12 @@ route.get("/", checkAuth, (req, res) => {
   const loggedInHeader = "../views/component/header_login.ejs";
   const loggedOutHeader = "../views/component/header.ejs";
   let header = loggedOutHeader;
-  let shop = "../views/component/open-shop/buka_toko.ejs";
+  let shop = false;
   if (req.session.user) {
     header = loggedInHeader;
-    shop = "../views/component/open-shop/goto_toko.ejs.ejs";
+  }
+  if (req.session.shop) {
+    shop = true;
   }
 
   res.render("../views/open_shop.ejs", { header, shop });
