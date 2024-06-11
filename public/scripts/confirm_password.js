@@ -1,7 +1,7 @@
 const register_form = document.getElementById("register_form");
 const register_button = document.getElementById("register_button");
-const password = document.getElementById("password");
-const password_confirm = document.getElementById("password_confirm");
+let password = document.getElementById("password");
+let password_confirm = document.getElementById("password_confirm");
 
 function resetForm() {
   password.value = "";
@@ -30,8 +30,8 @@ register_form.addEventListener("submit", (event) => {
     console.log(password.value, " ", password_confirm.value);
     password.setCustomValidity("Password tidak cocok");
     password_confirm.setCustomValidity("Password tidak cocok");
-    password.reportValidity();
-    password_confirm.reportValidity();
+    // password.reportValidity();
+    // password_confirm.reportValidity();
   }
   resetValidity(password);
   resetValidity(password_confirm);

@@ -1,50 +1,66 @@
 <header class="border-b border-[#7D887A]">
   <div class="flex justify-between py-4 mx-4">
     <div class="flex items-center justify-center px-4 text-2xl font-semibold">
-      <a class="font-plusJakarta" href="/">workall</a>
+      <a class="font-plusJakarta" href="/"
+        ><img
+          class="h-[35px]"
+          src="/images/component/logo-text.svg"
+          alt="workall-logo"
+      /></a>
     </div>
     <ul class="flex justify-between w-72">
       <li class="flex items-center justify-center underline">
-        <a href="/open_shop">Buka Toko</a>
+        <% if (!shop) { %> <%- include('./open-shop/buka_toko.ejs') %> <% } else
+        { %> <%- include('./open-shop/goto_toko.ejs') %> <% } %>
       </li>
       <li class="flex items-center justify-center">
-        <button id="notifikasiButton" >
-          <img src="/images/notif.svg" alt="">
+        <button id="notifikasiButton">
+          <img src="/images/notif.svg" alt="" />
         </button>
-        <div id="notifikasi" class="absolute z-10 w-[457px] hidden h-[457px] bg-white border top-[85px] right-[145px] rounded-3xl shadow-md">
+        <div
+          id="notifikasi"
+          class="absolute z-10 w-[457px] hidden h-[457px] bg-white border top-[85px] right-[145px] rounded-3xl shadow-md"
+        >
           <div class="flex flex-col justify-between w-full h-full p-6">
             <div class="flex justify-between">
               <p class="font-semibold text-[20px]">Notifikasi</p>
               <button id="closeNotif">
-                <img src="/images/x_sign.svg" alt="close">
+                <img src="/images/x_sign.svg" alt="close" />
               </button>
             </div>
             <div class="flex justify-center">
-              <img src="images/no_notif.svg" alt="">
+              <img src="images/no_notif.svg" alt="" />
             </div>
             <div class="flex justify-center">
-              <button class="underline text-[#7D887A] text-[18px]">Semua Notifikasi</button>
+              <button class="underline text-[#7D887A] text-[18px]">
+                Semua Notifikasi
+              </button>
             </div>
           </div>
         </div>
       </li>
       <li class="flex items-center justify-center">
         <button id="pesananButton" class="">
-          <img src="/images/pesanan.svg" alt="">
+          <img src="/images/pesanan.svg" alt="" />
         </button>
-        <div id="pesanan" class="absolute  z-10 w-[457px] hidden h-[457px] bg-white border top-[85px] right-[80px]  rounded-3xl shadow-md">
+        <div
+          id="pesanan"
+          class="absolute z-10 w-[457px] hidden h-[457px] bg-white border top-[85px] right-[80px] rounded-3xl shadow-md"
+        >
           <div class="flex flex-col justify-between w-full h-full p-6">
             <div class="flex justify-between">
               <p class="font-semibold text-[20px]">Pesanan</p>
               <button id="closePesanan">
-                <img src="/images/x_sign.svg" alt="close">
+                <img src="/images/x_sign.svg" alt="close" />
               </button>
             </div>
             <div class="flex justify-center">
-              <img src="images/no_pesanan.svg" alt="">
+              <img src="images/no_pesanan.svg" alt="" />
             </div>
             <div class="flex justify-center">
-              <button class="underline text-[#7D887A] text-[18px]">Semua Pesanan</button>
+              <button class="underline text-[#7D887A] text-[18px]">
+                Semua Pesanan
+              </button>
             </div>
           </div>
         </div>
@@ -57,51 +73,51 @@
     </ul>
   </div>
   <script>
-    const notifButton = document.getElementById('notifikasiButton');
-    const pesanButton = document.getElementById('pesananButton');
-    const notifikasi = document.getElementById('notifikasi');
-    const pesanan = document.getElementById('pesanan');
-    const closeNotif = document.getElementById('closeNotif');
-    const closePesanan = document.getElementById('closePesanan');
-    
-    closeNotif.addEventListener('click', function() {
-      notifikasi.classList.add('hidden');
-    })
-    closePesanan.addEventListener('click', function() {
-      pesanan.classList.add('hidden');
-    })
-  
-    notifButton.addEventListener('click', function(e) {
-      if(notifikasi.classList.contains('hidden') == true) {
-        notifikasi.classList.toggle('hidden'); 
-      }else{
-        notifikasi.classList.toggle('hidden'); 
+    const notifButton = document.getElementById("notifikasiButton");
+    const pesanButton = document.getElementById("pesananButton");
+    const notifikasi = document.getElementById("notifikasi");
+    const pesanan = document.getElementById("pesanan");
+    const closeNotif = document.getElementById("closeNotif");
+    const closePesanan = document.getElementById("closePesanan");
+
+    closeNotif.addEventListener("click", function () {
+      notifikasi.classList.add("hidden");
+    });
+    closePesanan.addEventListener("click", function () {
+      pesanan.classList.add("hidden");
+    });
+
+    notifButton.addEventListener("click", function (e) {
+      if (notifikasi.classList.contains("hidden") == true) {
+        notifikasi.classList.toggle("hidden");
+      } else {
+        notifikasi.classList.toggle("hidden");
       }
-      if(pesanan.classList.contains('hidden') == false) {
-        pesanan.classList.toggle('hidden');
-      }
-      e.stopPropagation();
-    })
-  
-    pesanButton.addEventListener('click', function(e) {
-      if(pesanan.classList.contains('hidden') == true) {
-        pesanan.classList.toggle('hidden');
-      }else{
-        pesanan.classList.toggle('hidden');
-      }
-      if(notifikasi.classList.contains('hidden') == false) {
-        notifikasi.classList.toggle('hidden');
+      if (pesanan.classList.contains("hidden") == false) {
+        pesanan.classList.toggle("hidden");
       }
       e.stopPropagation();
-    })
-  
-    document.addEventListener('click', function(e) {
+    });
+
+    pesanButton.addEventListener("click", function (e) {
+      if (pesanan.classList.contains("hidden") == true) {
+        pesanan.classList.toggle("hidden");
+      } else {
+        pesanan.classList.toggle("hidden");
+      }
+      if (notifikasi.classList.contains("hidden") == false) {
+        notifikasi.classList.toggle("hidden");
+      }
+      e.stopPropagation();
+    });
+
+    document.addEventListener("click", function (e) {
       if (!notifikasi.contains(e.target) && !notifButton.contains(e.target)) {
-        notifikasi.classList.add('hidden');
+        notifikasi.classList.add("hidden");
       }
       if (!pesanan.contains(e.target) && !pesanButton.contains(e.target)) {
-        pesanan.classList.add('hidden');
+        pesanan.classList.add("hidden");
       }
-    })
+    });
   </script>
 </header>

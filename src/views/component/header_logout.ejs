@@ -1,0 +1,54 @@
+<header class="border-b border-[#7D887A] bg-white">
+  <div class="flex justify-between py-4 mx-4">
+    <div class="flex items-center justify-center px-4 text-2xl font-semibold">
+      <a class="font-plusJakarta" href="/"
+        ><img
+          class="h-[35px]"
+          src="/images/component/logo-text.svg"
+          alt="workall-logo"
+      /></a>
+    </div>
+    <ul class="flex justify-between w-72">
+      <li class="flex items-center justify-center underline">
+        <%- include('./open-shop/buka_toko.ejs')%>
+      </li>
+      <li class="flex items-center justify-center">
+        <a
+          class="text-[#f4f4f4] bg-[#7D887A] border-2 border-[#7D887A] rounded-lg px-4 py-2"
+          href="/register"
+          >Daftar</a
+        >
+      </li>
+      <li class="flex items-center justify-center">
+        <a class="border-2 border-[#7D887A] rounded-lg px-4 py-2" href="/login"
+          >Masuk</a
+        >
+      </li>
+    </ul>
+  </div>
+</header>
+<script>
+  // Get session
+  // let session_data = {};
+  /*
+  const getSession = async () => {
+    const response = await fetch("http://localhost:5000/api/get-session", {
+      method: "GET",
+      credentials: "include",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+    } else {
+      const data = {
+        authenticated: false,
+      };
+      console.log(data);
+    }
+
+
+  };
+  */
+
+  // get cookies
+</script>

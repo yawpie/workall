@@ -1,13 +1,9 @@
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>workall | Landing Page</title>
-    <link rel="stylesheet" href="/styles/global.css" />
-    <link rel="icon" href="/images/favicon-32x32.png" type="image/png" />
+    <%- include ('./component/meta/head.ejs') %>
   </head>
   <body>
-    <%- include ('./component/header.ejs') %>
+    <%- include (header) %>
     <div class="h-[580px] flex justify-center items-center">
       <div class="flex justify-center items-center h-[100%] flex-col">
         <p
@@ -81,4 +77,5 @@
     </div>
     <%- include('./component/footer.ejs') %>
   </body>
+  <script></script>
 </html>

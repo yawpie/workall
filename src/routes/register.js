@@ -2,15 +2,30 @@ const express = require("express");
 const route = express.Router();
 const prisma = require("../database/db");
 
+route.get("/check-exist", async (req, res, next) => {
+  const { email } = req.body;
+  const user = await prisma.user
+    .findUnique({
+      where: {
+        email: email,
+      },
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  const exist = false;
+  if (user) {
+    res.send({
+      exist,
+    });
+  }
+  res.send({ exist });
+});
+
 route.get("/", (req, res) => {
-  // try {
-  //   res.sendFile(path("../public/register.html"));
-  //   res.status(200);
-  // } catch (error) {
-  //   console.log(error);
-  //   res.send(error).status(400);
-  // }
-  res.render("../views/register.ejs", { pageTitle: "Register" });
+  res.render("../views/register.ejs", {
+    header: "../views/component/header_plain.ejs",
+  });
 });
 
 route.post("/", async (req, res) => {
@@ -27,6 +42,20 @@ route.post("/", async (req, res) => {
         email: email,
         password: password,
         status_banned_user: false,
+      },
+    });
+
+    const shop = await prisma.shop.create({
+      data: {
+        id_user: user.id_user,
+        nama: "null",
+        alamat_toko: "null",
+        kontak_toko: 0,
+        deskripsi: "null",
+        kategori: "null",
+        no_rekening: 0,
+        ketersediaan: false,
+        status_banned_shop: false,
       },
     });
 
