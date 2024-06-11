@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2024 at 04:26 PM
+-- Generation Time: Jun 11, 2024 at 06:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -109,6 +109,13 @@ CREATE TABLE `shop` (
   `kontak_toko` bigint(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `shop`
+--
+
+INSERT INTO `shop` (`id_shop`, `nama_toko`, `deskripsi`, `status_banned_shop`, `ketersediaan`, `no_rekening`, `id_user`, `alamat_toko`, `foto_profil_toko`, `kontak_toko`) VALUES
+(4, 'null', 'null', 0, 0, 0, 65, 'null', NULL, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -132,9 +139,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `email`, `password`, `status_banned_user`, `username`, `nama_depan`, `nama_belakang`, `no_hp`) VALUES
 (25, 'tes@mail.com', 'pass', 0, 'yawpie', 'tes', 'tes', NULL),
-(37, 'mail@mail.com', '1234', 0, 'rafi', 'rafi', 'rafi', NULL),
-(46, 'm@mail.com', '1234', 0, 'rafi', 'rafi', 'rafi', NULL),
-(48, 'n@mail.com', '1234', 0, 'me', 'me', 'me', NULL);
+(65, 'a@mail.com', 'pass', 0, 'Rafi', 'Muhammad', 'Rafi', NULL);
 
 --
 -- Indexes for dumped tables
@@ -182,7 +187,6 @@ ALTER TABLE `review`
 --
 ALTER TABLE `shop`
   ADD PRIMARY KEY (`id_shop`),
-  ADD UNIQUE KEY `nama` (`nama_toko`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -230,13 +234,13 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
-  MODIFY `id_shop` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_shop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- Constraints for dumped tables
