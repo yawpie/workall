@@ -68,16 +68,24 @@
         </div>
       </li>
       <li class="flex items-center justify-center">
-        <button id="profileButton" class="p-5 border-2 rounded-full bg-slate-600">
-          <!-- <img src="" alt=""> -->
-        </button>
-        <div id="profile" class="absolute z-10 w-[257px] p-6 bg-white flex flex-col top-[85px] right-[24px] rounded-3xl shadow-md hidden">
+        <button
+          id="profileButton"
+          class="p-5 border-2 rounded-full bg-slate-600"
+        ></button>
+        <div
+          id="profile"
+          class="absolute z-10 w-[257px] p-6 bg-white flex flex-col top-[85px] right-[24px] rounded-3xl shadow-md hidden"
+        >
           <button id="closeProfil" class="self-end">
             <img src="/images/x_sign.svg" alt="close" />
           </button>
-          <button class="flex p-[10px] text-[20px] font-semibold">Profil</button>
+          <a href="/profile" class="flex p-[10px] text-[20px] font-semibold">
+            Profil
+          </a>
           <div class="border-[0.5px] border-black my-[10px]"></div>
-          <button class="flex p-[10px] text-[20px] font-semibold">Keluar</button>
+          <a href="/logout" class="flex p-[10px] text-[20px] font-semibold"
+            >Keluar</a
+          >
         </div>
       </li>
     </ul>
@@ -86,15 +94,15 @@
     const notifButton = document.getElementById("notifikasiButton");
     const pesanButton = document.getElementById("pesananButton");
     const profileButton = document.getElementById("profileButton");
-    
+
     const notifikasi = document.getElementById("notifikasi");
     const pesanan = document.getElementById("pesanan");
     const profile = document.getElementById("profile");
-    
+
     const closeNotif = document.getElementById("closeNotif");
     const closePesanan = document.getElementById("closePesanan");
     const closeProfil = document.getElementById("closeProfil");
-    
+
     closeNotif.addEventListener("click", function () {
       notifikasi.classList.add("hidden");
     });
@@ -104,7 +112,7 @@
     closeProfil.addEventListener("click", function () {
       profile.classList.add("hidden");
     });
-    
+
     notifButton.addEventListener("click", function (e) {
       notifikasi.classList.toggle("hidden");
       if (!pesanan.classList.contains("hidden")) {
