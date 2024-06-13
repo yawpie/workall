@@ -4,7 +4,7 @@ module.exports = async (req, res, next) => {
     next();
   }
   try {
-    const shop_data = await prisma.shop.findUnique({
+    const shop_data = await prisma.shop.findFirst({
       where: {
         ketersediaan: true,
         id_user: req.session.user.id_user,
@@ -14,11 +14,12 @@ module.exports = async (req, res, next) => {
     if (shop_data === null) {
       next();
     }
+
     req.session.shop = shop_data;
     req.session.save();
     next();
   } catch (error) {
-    console.log(error);
+    console.log("========= checkShopUtilError =========\n", error);
     next();
   }
 };

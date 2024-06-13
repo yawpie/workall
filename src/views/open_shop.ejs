@@ -37,6 +37,7 @@
           class="flex flex-col"
           action="/open_shop/first-part"
           method="post"
+          id="shop_form"
         >
           <!-- section 1 -->
           <div
@@ -57,7 +58,7 @@
             <label class="mt-6 mx-10 font-semibold" for="alamat">Alamat</label>
             <input
               type="text"
-              name="alamat"
+              name="alamat_toko"
               placeholder="Masukkan alamat..."
               class="text-input"
               id="req-address"
@@ -66,7 +67,7 @@
             <label class="mt-6 mx-10 font-semibold" for="kontak">Kontak</label>
             <input
               type="text"
-              name="kontak"
+              name="kontak_toko"
               placeholder="Masukkan kontak yang bisa dihubungi..."
               class="text-input"
               id="req-contact"
@@ -80,51 +81,58 @@
               class="text-input h-28"
               placeholder="Jelaskan sedikit tentang bisnis anda..."
               maxlength="255"
+              id="description"
             ></textarea>
 
             <input
-              type="submit"
+              type="button"
               value="Selanjutnya"
               id="next_button"
               class="button-register mx-10 mt-6"
             />
           </div>
           <!-- hidden form -->
-        </form>
-        <form action="">
+
+          <!-- section 2 -->
           <div class="flex flex-col form-section hidden" id="section_2">
             <p class="flex items-center justify-center">Foto Profil Bisnis</p>
             <div class="flex justify-center">
               <img
                 src="/images/placeholder/profile-placeholder.png"
-                id="profile-pic"
-                alt="profilepic"
+                id="placeholder-profile"
+                alt="profileapic"
                 class="w-[300px] h-[300px] rounded-full mx-10 mt-6"
               />
             </div>
             <input
               type="file"
-              name="shop_profile"
-              accept="image/png, image/jpg, image/jpeg"
+              id="foto_profil"
+              name="foto_profil_toko"
+              accept="image/*"
               class="mx-10 mt-[20px] outline-none border rounded bg-primary text-w-green"
             />
             <input
-              type="button"
+              type="submit"
               value="Selanjutnya"
-              id="another-next_button"
+              id="submit_button"
               class="button-register mx-10 mt-6"
             />
 
             <div class="flex justify-center items-center">
               <input
-                type="button"
+                type="submit"
                 class="outline-none underline text-w-grey cursor-pointer w-[60px]"
                 value="Lewati"
+                id="skip_button"
               />
             </div>
           </div>
         </form>
-        <div class="h-[670px] flex justify-center items-center hidden">
+        <!-- section 3 -->
+        <div
+          class="h-[600px] flex justify-center items-center hidden"
+          id="section_3"
+        >
           <div>
             <img
               src="/images/daftar_toko/berhasil.svg"
@@ -142,19 +150,89 @@
       </div>
     </div>
     <script>
+      let shop_data = {};
+      // next button animation
       const next_button = document.getElementById("next_button");
-      const name = document.getElementById("req-name");
-      const address = document.getElementById("req-address");
-      const contact = document.getElementById("req-contact");
-
       next_button.addEventListener("click", (event) => {
+        const name = document.getElementById("req-name").value;
+        const address = document.getElementById("req-address").value;
+        const contact = document.getElementById("req-contact").value;
+        const description = document.getElementById("description").value;
         if (name.value == "") {
           event.preventDefault();
           name.setCustomValidity("Nama harus diisi");
           name.reportValidity();
         }
+        shop_data = {
+          nama_toko: name,
+          alamat_toko: address,
+          kontak_toko: contact,
+          deskripsi: description,
+        };
         next(2);
       });
+
+      const placeholder = document.getElementById("placeholder-profile");
+      const fileInput = document.getElementById("foto_profil");
+      // changing image when uploaded
+      fileInput.addEventListener("change", (event) => {
+        const file = fileInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            placeholder.src = event.target.result;
+          };
+          reader.readAsDataURL(file);
+        } else {
+          console.log("No file selected");
+        }
+      });
+      // submitting the form
+      const shop_form = document.getElementById("shop_form");
+      shop_form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        console.log(shop_data);
+
+        const file = fileInput.files[0];
+
+        const sendImage = new FormData();
+        sendImage.append("foto_profil_toko", file);
+
+        try {
+          const imageResponse = await fetch("/open_shop/profile-pic", {
+            method: "POST",
+            body: sendImage,
+          });
+
+          const imageData = await imageResponse.json();
+          if (!imageData.success) {
+            throw new Error(imageData.error);
+          }
+          shop_data["fotos_profil_toko"] = imageData.url;
+          const sendForm = shop_data;
+
+          const formResponse = await fetch("/open_shop/create", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(sendForm),
+          });
+
+          const formData = await formResponse.json();
+          if (formData.success) {
+            next(3);
+            window.location.href = formData.redirectUrl;
+          } else {
+            throw new Error(formData.message);
+          }
+        } catch (error) {
+          console.error("an error occurred:", error);
+          alert("An error occurred while submitting the form.");
+        }
+      });
+
+      // next function
       function next(sectionId) {
         const currentSection = document.querySelector(".form-section.online");
         const nextSection = document.getElementById(`section_${sectionId}`);
@@ -169,21 +247,6 @@
           nextSection.classList.toggle("hidden");
         });
       }
-
-      function prevSection(sectionId) {
-        const currentSection = document.querySelector(".form-section.online");
-        const prevSection = document.getElementById(`section_${sectionId}`);
-
-        currentSection.classList.remove("online");
-        prevSection.classList.add("online");
-      }
-
-      document
-        .getElementById("multiStepForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          alert("Form submitted!");
-        });
     </script>
     <!-- <script src="/scripts/open_shop.js"></script> -->
   </body>

@@ -24,8 +24,8 @@ const chat = require("./chat");
 const make_order = require("./make-order");
 const layanan = require("./layanan");
 
-route.use(express.urlencoded({ extended: true }));
-route.use(express.json());
+route.use(express.urlencoded({ limit: "50mb", extended: true }));
+route.use(express.json({ limit: "50mb" }));
 route.use(express.static("public"));
 
 route.use("/transaction", transaction);

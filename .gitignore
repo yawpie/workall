@@ -36,3 +36,5 @@ yarn-debug.log*
 yarn-error.log*
 
 public/styles/global.css
+
+uploads/

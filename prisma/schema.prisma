@@ -74,11 +74,11 @@ model shop {
   deskripsi          String?   @db.VarChar(255)
   status_banned_shop Boolean
   ketersediaan       Boolean
-  no_rekening        BigInt
+  no_rekening        String    @db.VarChar(20)
   id_user            Int
   alamat_toko        String    @db.VarChar(255)
   foto_profil_toko   String?   @db.VarChar(255)
-  kontak_toko        BigInt
+  kontak_toko        String    @db.VarChar(12)
   layanan            layanan[]
   user               user      @relation(fields: [id_user], references: [id_user], onDelete: Cascade, map: "shop_ibfk_1")
 
