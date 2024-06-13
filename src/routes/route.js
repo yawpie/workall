@@ -22,6 +22,7 @@ const profile = require("./profile");
 const dashboard = require("./dashboard");
 const chat = require("./chat");
 const make_order = require("./make-order");
+const layanan = require("./layanan");
 
 route.use(express.urlencoded({ extended: true }));
 route.use(express.json());
@@ -39,5 +40,6 @@ route.use("/profile", profile);
 route.use("/dashboard", dashboard);
 route.use("/chat", chat);
 route.use("/make-order", make_order);
+route.use("/layanan", layanan);
 
 module.exports = route;
