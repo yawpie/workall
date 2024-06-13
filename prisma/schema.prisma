@@ -37,6 +37,7 @@ model layanan {
   nama_layanan   String           @db.VarChar(255)
   harga_starting Int
   kategori       layanan_kategori
+  deskripsi      String?          @db.VarChar(255)
   bukti          bukti[]
   laporan        laporan[]
   shop           shop             @relation(fields: [id_shop], references: [id_shop], onDelete: Cascade, map: "layanan_ibfk_1")

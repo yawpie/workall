@@ -17,6 +17,7 @@ module.exports = async (req, res, next) => {
 
     req.session.shop = shop_data;
     req.session.save();
+    req.shopExist = true;
     next();
   } catch (error) {
     console.log("========= checkShopUtilError =========\n", error);
