@@ -1,7 +1,155 @@
-<!-- isi disini -->
 <html lang="en">
   <head>
     <%- include('../component/meta/head.ejs') %>
   </head>
-  <body></body>
+  <body>
+    <%- include('../component/header_plain.ejs') %>
+    <div
+      class="flex flex-col items-center px-16 pt-6 pb-6 bg-white max-md:px-5"
+    >
+      <div class="flex flex-col max-w-full w-[840px]">
+        <div
+          class="flex flex-col justify-center items-center self-center px-5 py-8 max-w-full bg-white leading-[150%] w-[242px]"
+        >
+          <div class="w-[202.50px] h-[202.50px] relative bg-white">
+            <div
+              class="w-[187.50px] h-[187.50px] left-[7.50px] top-[7.50px] absolute bg-zinc-300 rounded-full"
+            ></div>
+            <button
+              class="p-1.5 left-[137.25px] top-[159px] absolute bg-white rounded-[9px] shadow flex-col justify-start items-center gap-[7.50px] inline-flex"
+            >
+              <img class="edit" alt="editpencil" src="/images/pencil.svg" />
+            </button>
+          </div>
+
+          <div
+            class="mt-2 text-lg font-semibold tracking-tight text-neutral-700"
+          >
+            Mohammad Rafy
+          </div>
+          <div
+            class="mt-2 text-sm font-medium tracking-tight text-neutral-700 text-opacity-50"
+          >
+            [id_user]
+          </div>
+        </div>
+        <div
+          class="flex flex-col justify-center p-8 mt-4 text-lg font-semibold bg-white shadow-lg rounded-[41.25px] max-md:px-5 max-md:max-w-full"
+        >
+          <div class="flex flex-col px-2 py-2 bg-white max-md:max-w-full">
+            <div
+              class="justify-center mt-2 tracking-tight bg-white leading-[150%] text-neutral-700 max-md:max-w-full"
+            >
+              Nama Depan
+            </div>
+            <div
+              class="flex gap-2 justify-between px-2 mt-2 text-base font-medium bg-white max-md:flex-wrap max-md:max-w-full"
+            >
+              <input
+                type="text"
+                value="Mohammad"
+                class="my-auto tracking-tight leading-[150%] text-neutral-700 text-opacity-50 rounded-md px-2 py-1"
+                id="namaDepan"
+              />
+              <button
+                class="justify-center px-6 py-2 text-center whitespace-nowrap bg-white rounded-md border border-solid border-neutral-500 leading-[120%] text-neutral-500 max-md:px-5"
+                onclick="saveNamaDepan()"
+              >
+                Simpan
+              </button>
+            </div>
+            <div
+              class="shrink-0 mt-1.5 h-px border border-solid bg-neutral-500 bg-opacity-50 border-neutral-500 border-opacity-50 max-md:max-w-full"
+            ></div>
+
+            <div
+              class="justify-center mt-2 tracking-tight bg-white leading-[150%] text-neutral-700 max-md:max-w-full"
+            >
+              Nama Belakang
+            </div>
+            <div
+              class="flex gap-2 justify-between px-2 mt-2 text-base font-medium whitespace-nowrap bg-white max-md:flex-wrap max-md:max-w-full"
+            >
+              <input
+                type="text"
+                value="Rafy"
+                class="my-auto tracking-tight leading-[150%] text-neutral-700 text-opacity-50 rounded-md px-2 py-1"
+                id="namaBelakang"
+              />
+              <button
+                class="justify-center px-6 py-2 text-center bg-white rounded-md border border-solid border-neutral-500 leading-[120%] text-neutral-500 max-md:px-5"
+                onclick="saveNamaBelakang()"
+              >
+                Simpan
+              </button>
+            </div>
+            <div
+              class="shrink-0 mt-1.5 h-px border border-solid bg-neutral-500 bg-opacity-50 border-neutral-500 border-opacity-50 max-md:max-w-full"
+            ></div>
+
+            <div
+              class="justify-center mt-2 tracking-tight bg-white leading-[150%] text-neutral-700 max-md:max-w-full"
+            >
+              Alamat Email
+            </div>
+            <div
+              class="justify-center mt-2 text-base font-medium tracking-tight leading-6 whitespace-nowrap bg-white text-neutral-700 text-opacity-50 max-md:max-w-full"
+            >
+              muhammadrafi@sigma.com
+            </div>
+            <div
+              class="shrink-0 mt-1.5 h-px border border-solid bg-neutral-500 bg-opacity-50 border-neutral-500 border-opacity-50 max-md:max-w-full"
+            ></div>
+
+            <div
+              class="justify-center mt-2 tracking-tight bg-white leading-[150%] text-neutral-700 max-md:max-w-full"
+            >
+              Password
+            </div>
+            <div
+              class="flex gap-2 justify-between px-2 mt-2 text-base font-medium whitespace-nowrap bg-white max-md:flex-wrap max-md:max-w-full"
+            >
+              <input
+                type="password"
+                value="************"
+                class="my-auto tracking-tight leading-[150%] text-neutral-700 text-opacity-50 rounded-md px-2 py-1"
+                id="password"
+              />
+              <button
+                class="justify-center px-6 py-2 text-center bg-white rounded-md border border-solid border-neutral-500 leading-[120%] text-neutral-500 max-md:px-5"
+                onclick="savePassword()"
+              >
+                Simpan
+              </button>
+            </div>
+            <div
+              class="shrink-0 mt-1.5 h-px border border-solid bg-neutral-500 bg-opacity-50 border-neutral-500 border-opacity-50 max-md:max-w-full"
+            ></div>
+
+            <div
+              class="justify-center mt-2 tracking-tight bg-white leading-[150%] text-neutral-700 max-md:max-w-full"
+            >
+              No. Telepon
+            </div>
+            <div
+              class="flex gap-2 justify-between px-2 mt-2 text-base font-medium whitespace-nowrap bg-white max-md:flex-wrap max-md:max-w-full"
+            >
+              <input
+                type="tel"
+                value="081234556789"
+                class="my-auto tracking-tight leading-[150%] text-neutral-700 text-opacity-50 rounded-md px-2 py-1"
+                id="noTelepon"
+              />
+              <button
+                class="justify-center px-6 py-2 text-center bg-white rounded-md border border-solid border-neutral-500 leading-[120%] text-neutral-500 max-md:px-5"
+                onclick="saveNoTelepon()"
+              >
+                Simpan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
