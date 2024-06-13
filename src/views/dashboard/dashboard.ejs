@@ -1,10 +1,81 @@
-<!-- isi disini -->
-<html lang="en">
-  <head>
-    <%- include('../component/meta/head.ejs') %>
-  </head>
-  <body>
-    <%- include(header) %>
-    <!-- pastikan variabel header ada di backend! -->
-  </body>
+<head>
+  <%- include('../component/meta/head.ejs') %>
+</head>
+
+<body>
+  <%- include('../component/header_plain.ejs') %>
+    <div class="mx-[120px] my-[30px] gap-[10px] flex flex-col">
+      <div class="p-[10px]">
+        <h1 class="font-bold text-[32px]">Dashboard</h1>
+      </div>
+      
+      <div class="bg-[#7D887A] bg-opacity-10 rounded-[50px] p-[10px] shadow-around flex items-center justify-between pr-8 border border-[#7D887A]">
+        <div class="flex items-center">
+          <img class="size-[80px] rounded-[50px] bg-center" src="" alt="">
+          <div class="ml-[6px] mr-[10px]">
+            <!-- passing nama toko dan lokasi toko -->
+            <h2 class="text-[18px] font-semibold text-left">Rafi's Elektronik</h2>
+            <p class="text-[14px] text-left font-semibold">Sembalun</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <img src="/images/star.svg" alt="">
+          <!-- passing rating toko -->
+          <p class="text-[20px] font-semibold">4.9</p>
+        </div>
+      </div>
+      
+      <div class="mx-[30px] my-[10px] flex gap-[30px]">
+        <div class="flex w-[332px] p-[15px] flex-col gap-[10px] bg-[#7D887A] rounded-3xl shadow-around">
+          <div class="flex p-[10px] justify-between ">
+            <p class="text-[#fff] font-semibold text-[18px]">Layanan berlangsung</p>
+            <img src="/images/dashboard/icon.svg" alt="">
+          </div>
+          <div class="p-[10px]">
+            <p class="text-[#fff] font-semibold text-[18px]">3</p>
+          </div>
+        </div>
+        <div class="flex w-[332px] p-[15px] flex-col gap-[10px] bg-[#7D887A] rounded-3xl shadow-around">
+          <div class="flex p-[10px] justify-between ">
+            <p class="text-[#fff] font-semibold text-[18px]">Layanan selesai</p>
+            <img src="/images/dashboard/icon.svg" alt="">
+          </div>
+          <div class="p-[10px]">
+            <p class="text-[#fff] font-semibold text-[18px]">34</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-[#7D887A] bg-opacity-10 rounded-[55px] flex flex-col px-[60px] py-[40px] gap-[20px] shadow-around border border-[#7D887A]">
+        <div>
+          <h1 class="font-semibold text-[24px]">Layanan yang Disediakan</h1>
+        </div>
+        <div id="has-layanan" class="flex gap-[40px] flex-wrap justify-center">
+          <%- include('../component/card_layanan.ejs') %>
+        </div>
+        <div id="tambah-button-container" class="flex justify-center">
+          <button id="tambah-button" class="p-3 text-white text-[16px] bg-[#7D887A] rounded-full font-semibold">
+            Tambahkan Layanan
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      // const hasLayanan = document.getElementById('has-layanan');
+      // const tambahButtonContainer = document.getElementById('tambah-button-container');
+      // const tambahButton = document.getElementById('tambah-button');
+      // tambahButton.addEventListener('click', () => {
+        // hasLayanan.innerHTML += `<%# include('../component/card_layanan.ejs') %>`;
+      // });
+      
+      // if(hasLayanan.childElementCount === 0){
+      //   hasLayanan.innerHTML = tambahButtonContainer.innerHTML;
+      //   tambahButtonContainer.innerHTML = '';
+      // }else{
+      //   tambahButtonContainer.appendChild(tambahButton);
+      // }
+      
+    </script>
+</body>
+
 </html>

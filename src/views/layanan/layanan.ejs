@@ -4,7 +4,56 @@
     <%- include('../component/meta/head.ejs') %>
   </head>
   <body>
-    <%- include(header) %>
-    <!-- pastikan variabel header ada di backend! -->
+    <%- include('../component/header_logout.ejs') %>
+    <div class="mx-[120px] my-[30px] gap-[10px] flex flex-col">
+      <div>
+        <h1 class="text-[32px]">Nama Layanan</h1>
+      </div>
+      
+      <div class="bg-[#7D887A] bg-opacity-10 rounded-[50px] p-[10px]  flex items-center">
+        <img class="size-[80px] rounded-[50px] bg-center" src="" alt="">
+        <div class="ml-[6px] mr-[10px]">
+            <!-- passing nama toko dan lokasi toko -->
+            <h2 class="text-[18px] font-semibold text-left">Rafi's Elektronik</h2>
+            <p class="text-[14px] text-left font-semibold">Sembalun</p>
+        </div>
+        <div class="flex gap-2">
+            <img src="/images/star.svg" alt="">
+            <!-- passing rating toko -->
+            <p class="text-[20px] font-semibold">4.9</p>
+        </div>
+      </div>
+      
+      <div class="shadow-around rounded-3xl mx-[76px] my-[10px] py-[51px] px-[43px] gap-[30px]">
+        <!-- deskripsi Layanan -->
+        <div class="p-[10px] gap-[10px] flex flex-col">
+          <div class="gap-[10px] flex">
+            <img src="/images/check.svg" alt="">
+            <p class="text-[24px] ">freon</p>
+          </div>
+          <div class="gap-[10px] flex">
+            <img src="/images/check.svg" alt="">
+            <p class="text-[24px] ">freon</p>
+          </div>
+          <div class="gap-[10px] flex">
+            <img src="/images/check.svg" alt="">
+            <p class="text-[24px] ">freon</p>
+          </div>
+        </div>
+
+        <div class="p-[10px]">
+          <h1 class="text-[30px] font-bold">Kisaran Harga</h1>
+        </div>
+
+        <div class="p-[10px] gap-[20px] flex flex-col ">
+          <button class="py-[12px] px-[28px] border border-[#7D887A] text-[#7D887A] rounded-full font-semibold">
+            Hubungi Toko
+          </button>
+          <button class="py-[12px] px-[28px] align-middle text-white  bg-[#7D887A] rounded-full font-semibold">
+            Selanjutnya
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
