@@ -11,7 +11,7 @@
       
       <div class="bg-[#7D887A] bg-opacity-10 rounded-[50px] p-[10px] shadow-around flex items-center justify-between pr-8 border border-[#7D887A]">
         <div class="flex items-center">
-          <img class="size-[80px] rounded-[50px] bg-center" src='' alt="">
+          <img id="profile-pic" class="size-[80px] rounded-[50px] bg-center" src='' alt="">
           <div class="ml-[6px] mr-[10px]">
             <!-- passing nama toko dan lokasi toko -->
             <h2 class="text-[18px] font-semibold text-left"><%= nama_toko %></h2>
@@ -61,9 +61,26 @@
       </div>
     </div>
     <script>
-      //window.onload = async () => {
-//        const foto_profil_toko = await fetch('/get-profpic')
-  //    }
+      const profilePic = document.getElementById('profile-pic');
+      window.onload = async () =>{
+        try{
+          const filename = await fetch('/dashboard/get-profile-pic');
+          if(!filename.ok){
+            throw new Error('Response not ok');
+          }
+          const blob = await filename.blob();
+          const imageUrl = URL.createObjectURL(blob);
+          
+          profilePic.src = imageUrl;
+          
+        }catch(error){
+          console.log('error:',error);
+          alert('error');
+        }
+        
+        
+      }
+      
       
     </script>
 </body>

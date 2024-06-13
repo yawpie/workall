@@ -23,6 +23,8 @@ const dashboard = require("./dashboard");
 const chat = require("./chat");
 const make_order = require("./make-order");
 const layanan = require("./layanan");
+const logout = require("./logout");
+const getLayanan = require("./get_layanan");
 
 route.use(express.urlencoded({ limit: "50mb", extended: true }));
 route.use(express.json({ limit: "50mb" }));
@@ -41,5 +43,7 @@ route.use("/dashboard", dashboard);
 route.use("/chat", chat);
 route.use("/make-order", make_order);
 route.use("/layanan", layanan);
+route.use("/logout", logout);
+route.use("/get-layanan", getLayanan);
 
 module.exports = route;
