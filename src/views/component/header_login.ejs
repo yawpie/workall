@@ -10,8 +10,10 @@
     </div>
     <ul class="flex justify-between w-72">
       <li class="flex items-center justify-center underline">
-        <% if (!shop) { %> <%- include('./open-shop/buka_toko.ejs') %> <% } else
-        { %> <%- include('./open-shop/goto_toko.ejs') %> <% } %>
+        <div class="w-[25px] h-[25px]">
+          <% if (!shop) { %> <%- include('./open-shop/buka_toko.ejs') %> <% }
+          else { %> <%- include('./open-shop/goto_toko.ejs') %> <% } %>
+        </div>
       </li>
       <li class="flex items-center justify-center">
         <button id="notifikasiButton">

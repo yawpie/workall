@@ -7,23 +7,23 @@
     <link rel="icon" href="/images/favicon-32x32.png" type="image/png" />
   </head>
   <body>
-    <%- include(header) %>
+    <%- include('./component/header_login.ejs') %>
     <div class="flex flex-row justify-evenly items-center p-[36px]">
-      <div class="flex flex-col justify-center items-center">
-        <div class="flex flex-col justify-center items-center">
+      <div class="flex flex-col items-center justify-center">
+        <div class="flex flex-col items-center justify-center">
           <p class="inter font-semibold text-[20px]">
-            Masukkan informasi bisnis Anda
+            Daftarkan Layanan Toko Anda
           </p>
           <br />
           <p class="inter font-normal text-center text-[14px]">
-            Berikan kami sedikit gambaran tentang bisnis layanan yang <br />Anda
-            ingin dirikan. Informasi ini akan ditampilkan di profil <br />publik
-            Anda, sehingga calon pelanggan dapat lebih <br />memahami bisnis
-            Anda.
+            Berikan keterangan terkait layanan yang anda tawarkan <br />
+            pada toko anda. Harap gunakan nama serta penjelasan <br />
+            yang mudah dimengerti dalam mendaftarkan layanan <br />
+            Anda
           </p>
         </div>
         <img
-          src="/images/daftar_toko/rumah.png"
+          src="/images/daftar_layanan/thinking.png"
           class="w-[400px]"
           alt="house"
         />
@@ -32,12 +32,12 @@
         class="flex items-center justify-center flex-col drop-shadow-md bg-white rounded-[55px] w-[430px]"
         id="register-screen"
       >
-        <p class="inter font-semibold text-[20px] my-7">Pendaftaran Bisnis</p>
+        <p class="inter font-semibold text-[20px] my-7">Pendaftaran Layanan</p>
         <form
           class="flex flex-col"
           action="/open_shop/first-part"
           method="post"
-          id="shop_form"
+          id="layanan_form"
         >
           <!-- section 1 -->
           <div
@@ -45,41 +45,42 @@
             id="section_1"
           >
             <label class="mx-10 font-semibold" for="nama_toko"
-              >Nama Bisnis</label
+              >Nama Layanan</label
             >
             <input
               type="text"
-              name="nama_toko"
-              placeholder="Masukkan nama bisnis..."
+              name="nama_layanan"
+              placeholder="Masukkan nama layanan..."
               class="text-input invalid:border-red-500"
               id="req-name"
               required
             />
-            <label class="mt-6 mx-10 font-semibold" for="alamat">Alamat</label>
+            <label class="mt-6 mx-10 font-semibold" for="harga_starting">Kisaran Harga</label>
             <input
-              type="text"
-              name="alamat_toko"
-              placeholder="Masukkan alamat..."
+              type="number"
+              name="harga_starting"
+              placeholder="Kisaran harga..."
               class="text-input"
-              id="req-address"
+              id="req-harga"
               required
             />
-            <label class="mt-6 mx-10 font-semibold" for="kontak">Kontak</label>
-            <input
-              type="text"
-              name="kontak_toko"
-              placeholder="Masukkan kontak yang bisa dihubungi..."
-              class="text-input"
-              id="req-contact"
-              required
-            />
+            <label class="mt-6 mx-10 font-semibold" for="kategori">Kategori</label>
+            <select class="text-input text-w-green text-[13px]" name="kategori" id="req-kategori" required>
+              <option value="Kategori" selected disabled>Kategori</option>
+              <option value="renovasi">Renovasi</option>
+              <option value="elektronik">Elektronik</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="kendaraan">Kendaraan</option>
+              <option value="penyewaan">Penyewaan</option>
+            </select>
+            
             <label class="mt-6 mx-10 font-semibold" for="deskripsi"
               >Deskripsi</label
             >
             <textarea
               name="deskripsi"
               class="text-input h-28"
-              placeholder="Jelaskan sedikit tentang bisnis anda..."
+              placeholder="Jelaskan sedikit tentang layanan anda..."
               maxlength="255"
               id="description"
             ></textarea>
@@ -94,44 +95,10 @@
           <!-- hidden form -->
 
           <!-- section 2 -->
-          <div class="flex flex-col form-section hidden" id="section_2">
-            <p class="flex items-center justify-center">Foto Profil Bisnis</p>
-            <div class="flex justify-center">
-              <img
-                src="/images/placeholder/profile-placeholder.png"
-                id="placeholder-profile"
-                alt="profileapic"
-                class="w-[300px] h-[300px] rounded-full mx-10 mt-6"
-              />
-            </div>
-            <input
-              type="file"
-              id="foto_profil"
-              name="foto_profil_toko"
-              accept="image/*"
-              class="mx-10 mt-[20px] outline-none border rounded bg-primary text-w-green"
-            />
-            <input
-              type="submit"
-              value="Selanjutnya"
-              id="submit_button"
-              class="button-register mx-10 mt-6"
-            />
-
-            <div class="flex justify-center items-center">
-              <input
-                type="submit"
-                class="outline-none underline text-w-grey cursor-pointer w-[60px]"
-                value="Lewati"
-                id="skip_button"
-              />
-            </div>
-          </div>
-        </form>
-        <!-- section 3 -->
+          
         <div
           class="h-[600px] flex justify-center items-center hidden"
-          id="section_3"
+          id="section_2"
         >
           <div>
             <img
@@ -149,105 +116,68 @@
         </div>
       </div>
     </div>
-    <script>
-      let shop_data = {};
-      // next button animation
-      const next_button = document.getElementById("next_button");
-      next_button.addEventListener("click", (event) => {
-        const name = document.getElementById("req-name").value;
-        const address = document.getElementById("req-address").value;
-        const contact = document.getElementById("req-contact").value;
-        const description = document.getElementById("description").value;
-        if (name.value == "") {
-          event.preventDefault();
-          name.setCustomValidity("Nama harus diisi");
-          name.reportValidity();
-        }
-        shop_data = {
-          nama_toko: name,
-          alamat_toko: address,
-          kontak_toko: contact,
-          deskripsi: description,
-        };
-        next(2);
-      });
-
-      const placeholder = document.getElementById("placeholder-profile");
-      const fileInput = document.getElementById("foto_profil");
-      // changing image when uploaded
-      fileInput.addEventListener("change", (event) => {
-        const file = fileInput.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            placeholder.src = event.target.result;
-          };
-          reader.readAsDataURL(file);
-        } else {
-          console.log("No file selected");
-        }
-      });
-      // submitting the form
-      const shop_form = document.getElementById("shop_form");
-      shop_form.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        console.log(shop_data);
-
-        const file = fileInput.files[0];
-
-        const sendImage = new FormData();
-        sendImage.append("foto_profil_toko", file);
-
-        try {
-          const imageResponse = await fetch("/open_shop/profile-pic", {
-            method: "POST",
-            body: sendImage,
-          });
-
-          const imageData = await imageResponse.json();
-          if (!imageData.success) {
-            throw new Error(imageData.error);
-          }
-          shop_data["fotos_profil_toko"] = imageData.url;
-          const sendForm = shop_data;
-
-          const formResponse = await fetch("/open_shop/create", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(sendForm),
-          });
-
-          const formData = await formResponse.json();
-          if (formData.success) {
-            next(3);
-            window.location.href = formData.redirectUrl;
-          } else {
-            throw new Error(formData.message);
-          }
-        } catch (error) {
-          console.error("an error occurred:", error);
-          alert("An error occurred while submitting the form.");
-        }
-      });
-
-      // next function
-      function next(sectionId) {
-        const currentSection = document.querySelector(".form-section.online");
-        const nextSection = document.getElementById(`section_${sectionId}`);
-
-        currentSection.classList.remove("online");
-        currentSection.classList.add("animate-translate-up");
-        currentSection.addEventListener("animationend", () => {
-          currentSection.classList.toggle("hidden");
-
-          nextSection.classList.add("animate-translate-down");
-          nextSection.classList.add("online");
-          nextSection.classList.toggle("hidden");
-        });
-      }
-    </script>
-    <!-- <script src="/scripts/open_shop.js"></script> -->
   </body>
+  <script>
+    let layanan_data = {};
+    // next button animation
+    const next_button = document.getElementById("next_button");
+    next_button.addEventListener("click", (event) => {
+      const name = document.getElementById("req-name").value;
+      const harga = document.getElementById("req-harga").value;
+      const category = document.getElementById("req-kategori").value;
+      const description = document.getElementById("description").value;
+      if (name.value == "") {
+        event.preventDefault();
+        name.setCustomValidity("Nama harus diisi");
+        name.reportValidity();
+      }
+      layanan_data = {
+        nama_layanan: name,
+        harga_starting: harga,
+        kategori: category,
+        deskripsi: description,
+      };
+      console.log(layanan_data);
+      next(2);
+       send("/open_layanan/add-layanan", layanan_data).then((res)=>{
+        if(res.success === true){
+          window.location.href = res.redirectUrl;
+          
+        }else{
+          alert(res.message);
+          }
+          
+          }).catch((err)=>{
+            console.log(err);
+            alert(res.message);
+       });
+    });
+
+    async function send(url, data) {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      return response.json();
+    }
+
+    function next(sectionId) {
+      const currentSection = document.querySelector(".form-section.online");
+      const nextSection = document.getElementById(`section_${sectionId}`);
+
+      currentSection.classList.remove("online");
+      currentSection.classList.add("animate-translate-up");
+      currentSection.addEventListener("animationend", () => {
+        currentSection.classList.toggle("hidden");
+
+        nextSection.classList.add("animate-translate-down");
+        nextSection.classList.add("online");
+        nextSection.classList.toggle("hidden");
+      });
+    }
+  </script>
 </html>
