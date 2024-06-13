@@ -9,7 +9,7 @@
         <h1 class="font-bold text-[32px]">Dashboard</h1>
       </div>
       
-      <div class="bg-[#7D887A] bg-opacity-10 rounded-[50px] p-[10px] shadow-around flex items-center justify-between pr-8">
+      <div class="bg-[#7D887A] bg-opacity-10 rounded-[50px] p-[10px] shadow-around flex items-center justify-between pr-8 border border-[#7D887A]">
         <div class="flex items-center">
           <img class="size-[80px] rounded-[50px] bg-center" src="" alt="">
           <div class="ml-[6px] mr-[10px]">
@@ -46,22 +46,36 @@
         </div>
       </div>
 
-      <div class="bg-[#7D887A] bg-opacity-10 rounded-[55px] flex flex-col px-[60px] py-[40px] gap-[20px]">
+      <div class="bg-[#7D887A] bg-opacity-10 rounded-[55px] flex flex-col px-[60px] py-[40px] gap-[20px] shadow-around border border-[#7D887A]">
         <div>
           <h1 class="font-semibold text-[24px]">Layanan yang Disediakan</h1>
         </div>
-        <div class="flex gap-[40px] flex-wrap justify-center">
-          <%- include('../component/card_layanan.ejs') %>
-          <%- include('../component/card_layanan.ejs') %>
+        <div id="has-layanan" class="flex gap-[40px] flex-wrap justify-center">
           <%- include('../component/card_layanan.ejs') %>
         </div>
-        <div class="flex justify-center">
-          <button class="p-3 text-white text-[16px] bg-[#7D887A] rounded-full font-semibold">
+        <div id="tambah-button-container" class="flex justify-center">
+          <button id="tambah-button" class="p-3 text-white text-[16px] bg-[#7D887A] rounded-full font-semibold">
             Tambahkan Layanan
           </button>
         </div>
       </div>
     </div>
+    <script>
+      // const hasLayanan = document.getElementById('has-layanan');
+      // const tambahButtonContainer = document.getElementById('tambah-button-container');
+      // const tambahButton = document.getElementById('tambah-button');
+      // tambahButton.addEventListener('click', () => {
+        // hasLayanan.innerHTML += `<%# include('../component/card_layanan.ejs') %>`;
+      // });
+      
+      // if(hasLayanan.childElementCount === 0){
+      //   hasLayanan.innerHTML = tambahButtonContainer.innerHTML;
+      //   tambahButtonContainer.innerHTML = '';
+      // }else{
+      //   tambahButtonContainer.appendChild(tambahButton);
+      // }
+      
+    </script>
 </body>
 
 </html>
