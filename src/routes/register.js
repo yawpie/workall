@@ -45,21 +45,21 @@ route.post("/", async (req, res) => {
       },
     });
 
-    const shop = await prisma.shop.create({
-      data: {
-        id_user: user.id_user,
-        nama_toko: "null",
-        alamat_toko: "null",
-        kontak_toko: 0,
-        deskripsi: "null",
-        no_rekening: 0,
-        ketersediaan: false,
-        status_banned_shop: false,
-      },
-    });
+    // const shop = await prisma.shop.create({
+    //   data: {
+    //     id_user: user.id_user,
+    //     nama_toko: "null",
+    //     alamat_toko: "null",
+    //     kontak_toko: 0,
+    //     deskripsi: "null",
+    //     no_rekening: 0,
+    //     ketersediaan: false,
+    //     status_banned_shop: false,
+    //   },
+    // });
 
     console.log("user:", user);
-    console.log("shop:", shop);
+    // console.log("shop:", shop);
     req.session.user = user;
     req.session.authenticated = true;
     res.json({
